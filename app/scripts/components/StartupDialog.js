@@ -8,7 +8,7 @@ export default class StartupDialog extends Component {
         return `
             <div class="startup-dialog-content">
             <div class="banner icon-ocsstore"></div>
-            <h1 class="title">Welcome to Opendesktop.org</h1>
+            <h1 class="title">Welcome to OCS-Store</h1>
             <span class="indicator icon-loading">Starting</span>
             </div>
         `;
