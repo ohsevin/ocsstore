@@ -26,8 +26,8 @@ export default class ToolBar extends Component {
         return `
             <button class="toolbar-button icon-chevron-left" ${backButtonAttr}></button>
             <button class="toolbar-button icon-chevron-right" ${forwardButtonAttr}></button>
-            <button class="toolbar-button icon-home" ${homeButtonAttr}></button>
-            <button class="toolbar-button icon-folder" ${collectionButtonAttr}></button>
+            <button class="toolbar-button icon-home label" ${homeButtonAttr}>Browse</button>
+            <button class="toolbar-button icon-folder label" ${collectionButtonAttr}>Installed</button>
             <span class="toolbar-indicator icon-loading"></span>
             <span class="toolbar-spacer"></span>
             <button class="toolbar-button icon-info" data-dispatch="upgrade-page"></button>
@@ -64,6 +64,12 @@ export default class ToolBar extends Component {
             .toolbar-button:hover,
             .toolbar-button:active {
                 background-color: #c7c7c7;
+            }
+
+            .toolbar-button.label {
+                width: auto;
+                padding: 0 4px 0 36px;
+                background-position: 4px center;
             }
 
             .toolbar-button[disabled] {
