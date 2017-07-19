@@ -1,3 +1,9 @@
+ocsstore (2.1.1-0ubuntu1) xenial; urgency=low
+
+  * Fix for file installation
+
+ -- Akira Ohgaki <akiraohgaki@gmail.com>  Wed, 19 Jul 2017 00:05:23 +0000
+
 ocsstore (2.1.0-0ubuntu1) xenial; urgency=low
 
   * Rebrand

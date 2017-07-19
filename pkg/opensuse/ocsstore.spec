@@ -1,6 +1,6 @@
 Summary: OCS-Store
 Name: ocsstore
-Version: 2.1.0
+Version: 2.1.1
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
@@ -37,5 +37,8 @@ make DESTDIR="%{buildroot}" prefix="/usr" install
 rm -rf %{buildroot}
 
 %changelog
+* Wed Jul 19 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.1.1-1
+- Fix for file installation
+
 * Sun Jul 09 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.1.0-1
 - Rebrand
