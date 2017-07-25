@@ -52,7 +52,7 @@ export default class ToolBar extends Component {
                 width: 32px;
                 height: 32px;
                 margin: 0 0.2em;
-                border: 1px solid rgba(0,0,0,0.1);
+                border-width: 0;
                 border-radius: 0.6em;
                 outline: none;
                 background-color: transparent;
