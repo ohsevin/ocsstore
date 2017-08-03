@@ -57,10 +57,8 @@ export default class ToolBar extends Component {
         this.element.style.background = '#e0e0e0';
 
         return `
+            .toolbar-button,
             .toolbar-select {
-            }
-
-            .toolbar-button {
                 display: inline-block;
                 flex: 0 0 auto;
                 width: 32px;
@@ -78,6 +76,15 @@ export default class ToolBar extends Component {
             .toolbar-button:hover,
             .toolbar-button:active {
                 background-color: #c7c7c7;
+            }
+
+            .toolbar-select {
+                width: auto;
+                border: 1px solid rgba(0,0,0,0.1);
+            }
+            .toolbar-select option {
+                background-color: #ffffff;
+                color: #222222;
             }
 
             .toolbar-button.label {
