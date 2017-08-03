@@ -16,7 +16,7 @@ export default class SidePanel extends Component {
             </header>
 
             <ul class="menu-items-main">
-            <li><span class="menu-label">Choose Startpage</span></li>
+            <!--<li><span class="menu-label">Choose Startpage</span></li>
             <li>
             <select class="menu-item" name="startPage">
             <option value="https://www.opendesktop.org/">opendesktop.org</option>
@@ -26,11 +26,12 @@ export default class SidePanel extends Component {
             <option value="https://www.box-look.org/">box-look.org</option>
             <option value="https://www.enlightenment-themes.org/">enlightenment-themes.org</option>
             </select>
-            </li>
+            </li>-->
+            <li><button class="menu-item" data-dispatch="about-page">About This App</button></li>
             </ul>
 
             <ul class="menu-items-footer">
-            <li><button class="menu-item" data-dispatch="about-page">About This App</button></li>
+            <!--<li><button class="menu-item" data-dispatch="about-page">About This App</button></li>-->
             </ul>
         `;
     }
@@ -119,6 +120,7 @@ export default class SidePanel extends Component {
     script() {
         this.toggle();
 
+        /*
         const config = new electronConfig({name: 'application'});
 
         const selectElement = this.element.querySelector('.menu-item[name="startPage"]');
@@ -133,6 +135,7 @@ export default class SidePanel extends Component {
             event.stopPropagation();
             document.dispatchEvent(new CustomEvent('start-page', {detail: {startPage: event.target.value}}));
         }, false);
+        */
     }
 
     toggle() {

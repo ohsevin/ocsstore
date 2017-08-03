@@ -1,5 +1,7 @@
 'use strict';
 
+const electronConfig = require('electron-config');
+
 import Component from 'js/Component.js';
 
 export default class ToolBar extends Component {
@@ -30,6 +32,15 @@ export default class ToolBar extends Component {
             <button class="toolbar-button icon-folder label" ${collectionButtonAttr}>Installed</button>
             <span class="toolbar-indicator icon-loading"></span>
             <span class="toolbar-spacer"></span>
+            <select class="toolbar-select" name="startPage">
+            <option value="">Choose Desktop</option>
+            <option value="https://www.opendesktop.org/">opendesktop.org</option>
+            <option value="https://www.gnome-look.org/">gnome-look.org</option>
+            <option value="https://store.kde.org/">store.kde.org</option>
+            <option value="https://www.xfce-look.org/">xfce-look.org</option>
+            <option value="https://www.box-look.org/">box-look.org</option>
+            <option value="https://www.enlightenment-themes.org/">enlightenment-themes.org</option>
+            </select>
             <button class="toolbar-button icon-info" data-dispatch="upgrade-page"></button>
             <button class="toolbar-button icon-menu" data-dispatch="side-panel"></button>
         `;
@@ -46,6 +57,9 @@ export default class ToolBar extends Component {
         this.element.style.background = '#e0e0e0';
 
         return `
+            .toolbar-select {
+            }
+
             .toolbar-button {
                 display: inline-block;
                 flex: 0 0 auto;
@@ -105,6 +119,23 @@ export default class ToolBar extends Component {
     script() {
         this.state.indicator ? this.showIndicator() : this.hideIndicator();
         this.state.upgrade ? this.showUpgradeButton() : this.hideUpgradeButton();
+
+        const config = new electronConfig({name: 'application'});
+
+        const selectElement = this.element.querySelector('.toolbar-select[name="startPage"]');
+        const targetElement = selectElement.querySelector(`option[value="${config.get('startPage')}"]`);
+
+        if (targetElement) {
+            targetElement.setAttribute('selected', 'selected');
+        }
+
+        selectElement.addEventListener('change', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (event.target.value) {
+                document.dispatchEvent(new CustomEvent('start-page', {detail: {startPage: event.target.value}}));
+            }
+        }, false);
     }
 
     showIndicator() {
