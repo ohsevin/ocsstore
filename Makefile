@@ -4,7 +4,7 @@ TARGET = ocsstore
 srcdir = .
 
 build_tmpdir = ./build_tmp
-ocsmanager_version = 0.4.2
+ocsmanager_version = 0.4.3
 
 DESTDIR =
 prefix = /usr/local
