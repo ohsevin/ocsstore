@@ -49,16 +49,16 @@ uninstall:
 	$(RM) $(DESTDIR)$(datadir)/applications/$(TARGET).desktop
 	$(RM) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(TARGET).svg
 
-$(TARGET): app
+$(TARGET): $(TARGET)-linux-x64
 	install -m 755 $(srcdir)/launcher/$(TARGET).sh ./$(TARGET)
 
-app: ocsmanager
+$(TARGET)-linux-x64: ocs-manager
 	cd $(srcdir); \
 		npm install; \
 		npm run package
 	cp -Rpf $(srcdir)/out/$(TARGET)-linux-x64 ./
 
-ocsmanager:
+ocs-manager:
 	mkdir -p $(build_tmpdir)
 	git clone https://github.com/opendesktop/ocs-manager.git -b release-$(ocsmanager_version) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager; \
