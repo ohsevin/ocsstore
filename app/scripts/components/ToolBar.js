@@ -1,5 +1,7 @@
 'use strict';
 
+const electronConfig = require('electron-config');
+
 import Component from 'js/Component.js';
 
 export default class ToolBar extends Component {
@@ -26,10 +28,19 @@ export default class ToolBar extends Component {
         return `
             <button class="toolbar-button icon-chevron-left" ${backButtonAttr}></button>
             <button class="toolbar-button icon-chevron-right" ${forwardButtonAttr}></button>
-            <button class="toolbar-button icon-home" ${homeButtonAttr}></button>
-            <button class="toolbar-button icon-folder" ${collectionButtonAttr}></button>
+            <button class="toolbar-button icon-home label" ${homeButtonAttr}>Browse</button>
+            <button class="toolbar-button icon-folder label" ${collectionButtonAttr}>Installed</button>
             <span class="toolbar-indicator icon-loading"></span>
             <span class="toolbar-spacer"></span>
+            <select class="toolbar-select" name="startPage">
+            <option value="">Choose Desktop</option>
+            <option value="https://www.opendesktop.org/">opendesktop.org</option>
+            <option value="https://www.gnome-look.org/">gnome-look.org</option>
+            <option value="https://store.kde.org/">store.kde.org</option>
+            <option value="https://www.xfce-look.org/">xfce-look.org</option>
+            <option value="https://www.box-look.org/">box-look.org</option>
+            <option value="https://www.enlightenment-themes.org/">enlightenment-themes.org</option>
+            </select>
             <button class="toolbar-button icon-info" data-dispatch="upgrade-page"></button>
             <button class="toolbar-button icon-menu" data-dispatch="side-panel"></button>
         `;
@@ -46,13 +57,14 @@ export default class ToolBar extends Component {
         this.element.style.background = '#e0e0e0';
 
         return `
-            .toolbar-button {
+            .toolbar-button,
+            .toolbar-select {
                 display: inline-block;
                 flex: 0 0 auto;
                 width: 32px;
                 height: 32px;
                 margin: 0 0.2em;
-                border: 1px solid rgba(0,0,0,0.1);
+                border-width: 0;
                 border-radius: 0.6em;
                 outline: none;
                 background-color: transparent;
@@ -64,6 +76,21 @@ export default class ToolBar extends Component {
             .toolbar-button:hover,
             .toolbar-button:active {
                 background-color: #c7c7c7;
+            }
+
+            .toolbar-select {
+                width: auto;
+                border: 1px solid rgba(0,0,0,0.1);
+            }
+            .toolbar-select option {
+                background-color: #ffffff;
+                color: #222222;
+            }
+
+            .toolbar-button.label {
+                width: auto;
+                padding: 0 4px 0 36px;
+                background-position: 4px center;
             }
 
             .toolbar-button[disabled] {
@@ -99,6 +126,23 @@ export default class ToolBar extends Component {
     script() {
         this.state.indicator ? this.showIndicator() : this.hideIndicator();
         this.state.upgrade ? this.showUpgradeButton() : this.hideUpgradeButton();
+
+        const config = new electronConfig({name: 'application'});
+
+        const selectElement = this.element.querySelector('.toolbar-select[name="startPage"]');
+        const targetElement = selectElement.querySelector(`option[value="${config.get('startPage')}"]`);
+
+        if (targetElement) {
+            targetElement.setAttribute('selected', 'selected');
+        }
+
+        selectElement.addEventListener('change', (event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            if (event.target.value) {
+                document.dispatchEvent(new CustomEvent('start-page', {detail: {startPage: event.target.value}}));
+            }
+        }, false);
     }
 
     showIndicator() {

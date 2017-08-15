@@ -48,7 +48,6 @@ let ocsManager = null;
             height: windowBounds.height
         });
 
-        //mainWindow.setBounds(config.get('windowBounds'));
         mainWindow.loadURL(`file://${__dirname}/index.html`);
 
         if (debug) {

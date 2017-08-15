@@ -1,5 +1,4 @@
 build_*/
-package-lock.json
 node_modules/
 bin/
 out/

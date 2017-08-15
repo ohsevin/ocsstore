@@ -16,21 +16,10 @@ export default class SidePanel extends Component {
             </header>
 
             <ul class="menu-items-main">
-            <li><span class="menu-label">Choose Startpage</span></li>
-            <li>
-            <select class="menu-item" name="startPage">
-            <option value="https://www.opendesktop.org/">opendesktop.org</option>
-            <option value="https://www.gnome-look.org/">gnome-look.org</option>
-            <option value="https://store.kde.org/">store.kde.org</option>
-            <option value="https://www.xfce-look.org/">xfce-look.org</option>
-            <option value="https://www.box-look.org/">box-look.org</option>
-            <option value="https://www.enlightenment-themes.org/">enlightenment-themes.org</option>
-            </select>
-            </li>
+            <li><button class="menu-item" data-dispatch="about-page">About This App</button></li>
             </ul>
 
             <ul class="menu-items-footer">
-            <li><button class="menu-item" data-dispatch="about-page">About This App</button></li>
             </ul>
         `;
     }
@@ -108,31 +97,11 @@ export default class SidePanel extends Component {
             .menu-item:active {
                 background-color: #03a9f4;
             }
-
-            .menu-item option {
-                background-color: #ffffff;
-                color: #222222;
-            }
         `;
     }
 
     script() {
         this.toggle();
-
-        const config = new electronConfig({name: 'application'});
-
-        const selectElement = this.element.querySelector('.menu-item[name="startPage"]');
-        const targetElement = selectElement.querySelector(`option[value="${config.get('startPage')}"]`);
-
-        if (targetElement) {
-            targetElement.setAttribute('selected', 'selected');
-        }
-
-        selectElement.addEventListener('change', (event) => {
-            event.preventDefault();
-            event.stopPropagation();
-            document.dispatchEvent(new CustomEvent('start-page', {detail: {startPage: event.target.value}}));
-        }, false);
     }
 
     toggle() {
