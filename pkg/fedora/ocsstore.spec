@@ -1,6 +1,6 @@
 Summary: OCS-Store
 Name: ocsstore
-Version: 2.1.1
+Version: 2.2.0
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
@@ -37,6 +37,11 @@ make DESTDIR="%{buildroot}" prefix="/usr" install
 rm -rf %{buildroot}
 
 %changelog
+* Tue Aug 15 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.2.0-1
+- Toolbar items and sidebar changed
+- Added theme apply functions for Cinnamon desktop, it's available for wallpaper, icon, cursor, gtk3 theme, metacity theme, and cinnamon theme
+- Added theme apply functions for Mate desktop, it's available for wallpaper, icon, cursor, gtk2 theme, and metacity theme
+
 * Wed Jul 19 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.1.1-1
 - Fix for file installation
 
