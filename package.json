@@ -2,7 +2,7 @@
   "name": "ocsstore",
   "productName": "OCS-Store",
   "version": "2.2.0",
-  "_versioncode": 7,
+  "_versioncode": 8,
   "_releaseMeta": "https://github.com/opendesktop/ocsstore/raw/master/release.json",
   "description": "OCS-compatible Electron-based frontend.",
   "keywords": [
