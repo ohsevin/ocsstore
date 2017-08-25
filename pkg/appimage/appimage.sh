@@ -15,4 +15,5 @@ chmod 755 appimagetool
 
 ./squashfs-root/AppRun ${PKGNAME}.AppDir
 
-mv *.AppImage ${PKGNAME}-x86_64.AppImage
+mv *.AppImage rename.AppImage
+mv rename.AppImage ${PKGNAME}-x86_64.AppImage
