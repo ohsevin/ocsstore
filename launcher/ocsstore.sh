@@ -1,13 +1,13 @@
 #!/bin/bash
 
-PWD="$(cd "$(dirname "${0}")/../" && pwd)"
+APPDIR="$(dirname "$(readlink -f "${0}")")"
 
-if [ -f "${PWD}/ocsstore-linux-x64/ocsstore" ]; then
-    ${PWD}/ocsstore-linux-x64/ocsstore
-elif [ -f "${PWD}/usr/local/lib/ocsstore-linux-x64/ocsstore" ]; then
-    ${PWD}/usr/local/lib/ocsstore-linux-x64/ocsstore
-elif [ -f "${PWD}/usr/lib/ocsstore-linux-x64/ocsstore" ]; then
-    ${PWD}/usr/lib/ocsstore-linux-x64/ocsstore
+if [ -f "${APPDIR}/ocsstore-linux-x64/ocsstore" ]; then
+    ${APPDIR}/ocsstore-linux-x64/ocsstore
+elif [ -f "${APPDIR}/usr/local/lib/ocsstore-linux-x64/ocsstore" ]; then
+    ${APPDIR}/usr/local/lib/ocsstore-linux-x64/ocsstore
+elif [ -f "${APPDIR}/usr/lib/ocsstore-linux-x64/ocsstore" ]; then
+    ${APPDIR}/usr/lib/ocsstore-linux-x64/ocsstore
 elif [ -f '/usr/local/lib/ocsstore-linux-x64/ocsstore' ]; then
     /usr/local/lib/ocsstore-linux-x64/ocsstore
 elif [ -f '/usr/lib/ocsstore-linux-x64/ocsstore' ]; then
