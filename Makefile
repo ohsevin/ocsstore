@@ -70,7 +70,8 @@ ocs-manager_default:
 
 ocs-manager_appimage:
 	mkdir -p $(build_tmpdir)
-	git clone https://github.com/opendesktop/ocs-manager.git -b release-$(ocsmanager_version) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
+	#git clone https://github.com/opendesktop/ocs-manager.git -b release-$(ocsmanager_version) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
+	git clone https://github.com/opendesktop/ocs-manager.git -b develop --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager; \
 		sh ./scripts/build.sh appimage
 	install -D -m 755 `find "$(build_tmpdir)/ocs-manager" -type f -name "ocs-manager*.AppImage"` $(srcdir)/bin/ocs-manager
