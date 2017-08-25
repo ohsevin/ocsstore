@@ -4,6 +4,7 @@ TARGET = ocsstore
 srcdir = .
 
 build_tmpdir = ./build_tmp
+ocsmanager_build = default
 ocsmanager_version = 0.4.3
 
 DESTDIR =
@@ -52,13 +53,13 @@ uninstall:
 $(TARGET): $(TARGET)-linux-x64
 	install -m 755 $(srcdir)/launcher/$(TARGET).sh ./$(TARGET)
 
-$(TARGET)-linux-x64: ocs-manager
+$(TARGET)-linux-x64: ocs-manager_$(ocsmanager_build)
 	cd $(srcdir); \
 		npm install; \
 		npm run package
 	cp -Rpf $(srcdir)/out/$(TARGET)-linux-x64 ./
 
-ocs-manager:
+ocs-manager_default:
 	mkdir -p $(build_tmpdir)
 	git clone https://github.com/opendesktop/ocs-manager.git -b release-$(ocsmanager_version) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
 	cd $(build_tmpdir)/ocs-manager; \
@@ -66,3 +67,10 @@ ocs-manager:
 		qmake ./ocs-manager.pro; \
 		make
 	install -D -m 755 $(build_tmpdir)/ocs-manager/ocs-manager $(srcdir)/bin/ocs-manager
+
+ocs-manager_appimage:
+	mkdir -p $(build_tmpdir)
+	git clone https://github.com/opendesktop/ocs-manager.git -b release-$(ocsmanager_version) --single-branch --depth=1 $(build_tmpdir)/ocs-manager
+	cd $(build_tmpdir)/ocs-manager; \
+		sh ./scripts/build.sh appimage
+	install -D -m 755 $(build_tmpdir)/ocs-manager/ocs-manager*.AppImage $(srcdir)/bin/ocs-manager
