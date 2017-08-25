@@ -74,8 +74,19 @@ build_snap() {
     echo 'Not implemented yet'
 }
 
-build_appimage() {
+build_flatpak() {
     echo 'Not implemented yet'
+}
+
+build_appimage() {
+    cd "${PROJDIR}"
+    mkdir -p "${BUILDDIR}"
+    export_srcarchive "${SRCARCHIVE}"
+
+    tar -xzvf "${SRCARCHIVE}" -C "${BUILDDIR}"
+    cp "${PROJDIR}/pkg/appimage/appimage.sh" "${BUILDDIR}/${PKGNAME}"
+    cd "${BUILDDIR}/${PKGNAME}"
+    sh appimage.sh
 }
 
 if [ "${BUILDTYPE}" = 'ubuntu' ]; then
@@ -88,9 +99,11 @@ elif [ "${BUILDTYPE}" = 'archlinux' ]; then
     build_archlinux
 elif [ "${BUILDTYPE}" = 'snap' ]; then
     build_snap
+elif [ "${BUILDTYPE}" = 'flatpak' ]; then
+    build_flatpak
 elif [ "${BUILDTYPE}" = 'appimage' ]; then
     build_appimage
 else
-    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|snap|appimage]"
+    echo "sh $(basename "${0}") [ubuntu|fedora|archlinux|snap|flatpak|appimage]"
     exit 1
 fi
