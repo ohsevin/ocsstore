@@ -77,7 +77,7 @@ build_fedora() {
 }
 
 build_opensuse() {
-    # docker-image: opensuse:42.1
+    # docker-image: opensuse:42.2
     zypper --non-interactive refresh
     zypper --non-interactive install make automake gcc gcc-c++ libtool libqt5-qtbase-devel libQt5Gui-devel libqt5-qtwebsockets-devel libQt5DBus-devel
     zypper --non-interactive install git nodejs npm rpm-build
