@@ -99,7 +99,7 @@ build_opensuse() {
 build_archlinux() {
     # docker-image: base/archlinux:latest
     pacman -Syu --noconfirm
-    pacman -S --noconfirm base-devel qt5-base qt5-websockets
+    pacman -S --noconfirm base-devel qt5-base qt5-websockets gconf libxss
     pacman -S --noconfirm git nodejs npm
     pacman -S --noconfirm curl
 
