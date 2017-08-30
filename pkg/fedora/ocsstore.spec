@@ -1,6 +1,6 @@
 Summary: OCS-Store
 Name: ocsstore
-Version: 2.2.0
+Version: 2.2.1
 Release: 1%{?dist}
 License: GPLv3+
 Group: Applications/Internet
@@ -9,7 +9,7 @@ URL: https://github.com/opendesktop/ocsstore
 #Source0: https://github.com/opendesktop/ocsstore/archive/release-%{version}.tar.gz
 Source0: %{name}.tar.gz
 
-Requires: qt5-qtbase >= 5.3.0, qt5-qtbase-gui >= 5.3.0, qt5-qtwebsockets >= 5.3.0
+Requires: qt5-qtbase >= 5.3.0, qt5-qtbase-gui >= 5.3.0, qt5-qtwebsockets >= 5.3.0, GConf2, libXScrnSaver
 BuildRequires: make, automake, gcc, gcc-c++, libtool, qt5-qtbase-devel >= 5.3.0, qt5-qtwebsockets-devel >= 5.3.0, git, nodejs, npm, rpm-build
 
 %description
@@ -37,6 +37,10 @@ make DESTDIR="%{buildroot}" prefix="/usr" install
 rm -rf %{buildroot}
 
 %changelog
+* Wed Aug 30 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.2.1-1
+- Fix for app launcher
+- Fix missing dependencies
+
 * Tue Aug 15 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.2.0-1
 - Toolbar items and sidebar changed
 - Added theme apply functions for Cinnamon desktop, it's available for wallpaper, icon, cursor, gtk3 theme, metacity theme, and cinnamon theme
