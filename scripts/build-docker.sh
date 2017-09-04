@@ -99,7 +99,7 @@ build_opensuse() {
 build_archlinux() {
     # docker-image: base/archlinux:latest
     pacman -Syu --noconfirm
-    pacman -S --noconfirm base-devel qt5-base qt5-websockets gconf libxss
+    pacman -S --noconfirm base-devel gconf libxss qt5-base qt5-websockets
     pacman -S --noconfirm git nodejs npm
     pacman -S --noconfirm curl
 
@@ -126,7 +126,7 @@ build_appimage() {
     # docker-image: ubuntu:17.10
     apt update -qq
     apt -y install build-essential qt5-default libqt5websockets5-dev
-    apt -y install git nodejs npm
+    apt -y install git nodejs npm libgconf-2-4 libxss1
     apt -y install curl
 
     install_nodejs
