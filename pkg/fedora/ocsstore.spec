@@ -29,6 +29,7 @@ make DESTDIR="%{buildroot}" prefix="/usr" install
 %files
 %defattr(-,root,root)
 %{_bindir}/%{name}
+%{_bindir}/%{name}-appimage
 /usr/lib/%{name}-*/*
 %{_datadir}/applications/%{name}.desktop
 %{_datadir}/icons/hicolor/scalable/apps/%{name}.svg
@@ -37,7 +38,8 @@ make DESTDIR="%{buildroot}" prefix="/usr" install
 rm -rf %{buildroot}
 
 %changelog
-* Wed Aug 30 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.2.1-1
+* Mon Sep 25 2017 Akira Ohgaki <akiraohgaki@gmail.com> - 2.2.1-1
+- Support AppImage
 - Fix for app launcher
 - Fix missing dependencies
 
