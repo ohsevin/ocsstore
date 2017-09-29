@@ -319,7 +319,30 @@ import Root from '../components/Root.js';
             .then((data) => {
                 if (data.versioncode > packageMeta._versioncode) {
                     console.log('Found newer version');
-                    resolve(data);
+
+                    if (process.env.APPIMAGE == path.join(remote.app.getPath('home'), '.local', 'bin', 'ocsstore.AppImage')) {
+                        for (const releasefile of data.releasefiles) {
+                            if (releasefile.url.toLowerCase().endsWith('x86_64.appimage')) {
+                                const dirPath = path.join(remote.app.getPath('home'), '.cache', 'ocsstore');
+                                const filePath = path.join(dirPath, 'ocsstore.AppImage');
+
+                                if (!isDirectory(dirPath)) {
+                                    fs.mkdirSync(dirPath);
+                                }
+
+                                request.get(releasefile.url)
+                                .on('error', (error) => {
+                                    console.error(error);
+                                })
+                                .pipe(fs.createWriteStream(filePath));
+
+                                break;
+                            }
+                        }
+                    }
+                    else {
+                        resolve(data);
+                    }
                 }
             })
             .catch((error) => {

@@ -14,9 +14,10 @@ make DESTDIR="${PKGNAME}.AppDir" prefix="/usr" install
 install -D -m 755 /usr/lib/x86_64-linux-gnu/libgconf-2.so.4 ${PKGNAME}.AppDir/usr/lib/ocsstore-linux-x64/libgconf-2.so.4
 install -D -m 755 /usr/lib/x86_64-linux-gnu/libXss.so.1 ${PKGNAME}.AppDir/usr/lib/ocsstore-linux-x64/libXss.so.1
 
-cp ${PKGNAME}.AppDir/usr/bin/${PKGNAME} ${PKGNAME}.AppDir/AppRun
-cp ${PKGNAME}.AppDir/usr/share/applications/${PKGNAME}.desktop ${PKGNAME}.AppDir/${PKGNAME}.desktop
-cp ${PKGNAME}.AppDir/usr/share/icons/hicolor/scalable/apps/${PKGNAME}.svg ${PKGNAME}.AppDir/${PKGNAME}.svg
+install -D -m 755 ${PKGNAME}.AppDir/usr/bin/${PKGNAME} ${PKGNAME}.AppDir/AppRun
+install -D -m 755 ${PKGNAME}.AppDir/usr/bin/${PKGNAME}-appimage ${PKGNAME}.AppDir/${PKGNAME}-appimage
+install -D -m 644 ${PKGNAME}.AppDir/usr/share/applications/${PKGNAME}.desktop ${PKGNAME}.AppDir/${PKGNAME}.desktop
+install -D -m 644 ${PKGNAME}.AppDir/usr/share/icons/hicolor/scalable/apps/${PKGNAME}.svg ${PKGNAME}.AppDir/${PKGNAME}.svg
 
 ./squashfs-root/AppRun ${PKGNAME}.AppDir
 
