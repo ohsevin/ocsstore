@@ -31,6 +31,7 @@ build: $(TARGET) ;
 
 clean:
 	$(RM) ./$(TARGET)
+	$(RM) ./$(TARGET)-appimage
 	$(RM) ./$(TARGET)-linux-x64
 	$(RM) $(build_tmpdir)
 	$(RM) $(srcdir)/node_modules
@@ -39,6 +40,7 @@ clean:
 
 install:
 	$(INSTALL_PROGRAM) ./$(TARGET) $(DESTDIR)$(bindir)/$(TARGET)
+	$(INSTALL_PROGRAM) ./$(TARGET)-appimage $(DESTDIR)$(bindir)/$(TARGET)-appimage
 	$(MKDIR) $(DESTDIR)$(libdir)
 	$(CP) ./$(TARGET)-linux-x64 $(DESTDIR)$(libdir)
 	$(INSTALL_DATA) $(srcdir)/desktop/$(TARGET).desktop $(DESTDIR)$(datadir)/applications/$(TARGET).desktop
@@ -46,12 +48,14 @@ install:
 
 uninstall:
 	$(RM) $(DESTDIR)$(bindir)/$(TARGET)
+	$(RM) $(DESTDIR)$(bindir)/$(TARGET)-appimage
 	$(RM) $(DESTDIR)$(libdir)/$(TARGET)-linux-x64
 	$(RM) $(DESTDIR)$(datadir)/applications/$(TARGET).desktop
 	$(RM) $(DESTDIR)$(datadir)/icons/hicolor/scalable/apps/$(TARGET).svg
 
 $(TARGET): $(TARGET)-linux-x64
 	install -m 755 $(srcdir)/launcher/$(TARGET).sh ./$(TARGET)
+	install -m 755 $(srcdir)/launcher/$(TARGET)-appimage.sh ./$(TARGET)-appimage
 
 $(TARGET)-linux-x64: ocs-manager_$(ocsmanager_build)
 	cd $(srcdir); \
